@@ -6,6 +6,8 @@ Created on Fri Mar  2 13:59:39 2012
 
 Programmed according to Neumaier and Schneider and heavily inspired by ARFIT toolkit.
 """
+import pyximport
+pyximport.install()
 
 import numpy as np
 from scipy import linalg

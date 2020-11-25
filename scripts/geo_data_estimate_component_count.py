@@ -4,14 +4,14 @@ import matplotlib
 matplotlib.use('Agg')
 
 from datetime import date, datetime
-from geo_field import GeoField
-from surr_geo_field_ar import SurrGeoFieldAR
+from src.geo_field import GeoField
+from src.surr_geo_field_ar import SurrGeoFieldAR
 from multiprocessing import Process, Queue, Pool
-from component_analysis import pca_eigvals_gf, pca_components_gf, matched_components, orthomax
-from spatial_model_generator import constructVAR, make_model_geofield
-from geo_data_loader import load_monthly_sat_all, load_monthly_slp_all, load_monthly_slp2x2_all, load_monthly_hgt500_all
-from geo_rendering import render_component_single
-from multi_stats import compute_eigvals_pvalues, fdr_test, bonferroni_test, holm_test
+from src.component_analysis import pca_eigvals_gf, pca_components_gf, matched_components, orthomax
+from src.spatial_model_generator import constructVAR, make_model_geofield
+from src.geo_data_loader import load_monthly_sat_all, load_monthly_slp_all, load_monthly_slp2x2_all, load_monthly_hgt500_all
+from src.geo_rendering import render_component_single
+from src.multi_stats import compute_eigvals_pvalues, fdr_test, bonferroni_test, holm_test
 
 import os.path
 import numpy as np
@@ -92,7 +92,7 @@ if __name__ == "__main__":
             log_file.write('[%s] %s\n' % (str(datetime.now()), msg))
             log_file.flush()
 
-        os.chdir('/home/martin/Projects/Climate/ndw-climate/')
+        os.chdir('/home/dl/Public/Skye/ndw-climate/')
         log("Loading geo field...")
 
         # this function loads the data and does SOME preprocessing on it,
@@ -101,6 +101,7 @@ if __name__ == "__main__":
 
         if NUM_EIGVALS is None:
             NUM_EIGVALS = gf.data().shape[0]
+            print gf.data().shape
             log("Number of eigenvalues set automatically to length of time series %d." % NUM_EIGVALS)
 
         log('Analyzing data: %s with suffix: %s' % (DATA_NAME, SUFFIX))
